@@ -1,0 +1,59 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+
+palette = "frappe"
+
+# 模块顺序：系统图标 → 用户@主机 → 路径 → Git 分支/提交 → 提示符
+format = "$os$username$hostname$directory$git_branch$git_commit$character"
+
+[palettes.frappe]
+os = "#ACB0BE"
+blue = "#8CAAEE"
+pink = "#F4B8E4"
+lavender = "#BABBF1"
+red = "#E78284"
+
+[os]
+format = "[$symbol]($style) "
+style = "fg:os"
+disabled = false
+
+[os.symbols]
+Arch = "\uF303"
+
+[username]
+show_always = true
+style_user = "fg:blue"
+style_root = "fg:blue"
+format = "[$user@]($style)"
+
+[hostname]
+ssh_only = false
+trim_at = ""
+style = "fg:blue"
+format = "[$hostname]($style) "
+
+[directory]
+style = "fg:pink"
+format = "[$path]($style) "
+truncation_length = 1
+truncate_to_repo = false
+home_symbol = "~"
+truncation_symbol = "..\uE5FE../"
+
+[git_branch]
+symbol = "\uE725"
+style = "fg:lavender"
+format = "[$symbol $branch]($style) "
+only_attached = true
+
+[git_commit]
+style = "fg:lavender"
+format = "[\ue729 $hash]($style) "
+only_detached = true
+tag_disabled = true
+
+[character]
+success_symbol = "[\uF105](fg:os) "
+error_symbol = "[\uF105](fg:red) "

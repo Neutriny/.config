@@ -1,0 +1,62 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "builtin",
+    "source": "arch"
+  },
+  "display": {
+    "separator": ": ",
+    "color": {
+      "keys": "yellow"
+    },
+    "key": { "type": "both", "width": 18 }
+  },
+  "modules": [
+    "title",
+
+    { "type": "separator", "string": "──────── System ────────", "times": 1 },
+    { "type": "os", "keyIcon": "\udb82\udcc7" },
+    { "type": "host", "format": "{vendor} {family}" },
+    "kernel", "packages", "shell",
+
+    { "type": "separator", "string": "──────── Desktop ────────", "times": 1 },
+    "wm", "terminal",
+
+    { "type": "separator", "string": "──────── Hardware ────────", "times": 1 },
+    "cpu", "gpu", "memory", "swap",
+    { "type": "disk", "folders": "/:/mnt/c" },
+    { "type": "disk", "folders": "/usr/src/linux-headers-6.18.54.1-microsoft-standard-WSL2", "key": "Disk ({mountpoint})", "format": "\n                                                          {size-used} / {size-total} ({size-percentage}) - {filesystem} [Read-only]" },
+
+    { "type": "separator", "string": "──────── Development ────────", "times": 1 },
+    {
+      "type": "command",
+      "key": "Haskell",
+      "keyIcon": "\ue777",
+      "text": "ghc --version | awk '{print $NF}'",
+      "format": "haskell {}"
+    },
+    {
+      "type": "command",
+      "key": "OCaml",
+      "keyIcon": "\ue84e",
+      "text": "ocaml -version | awk '{print $NF}'",
+      "format": "ocamal {}"
+    },
+    {
+      "type": "command",
+      "key": "Elixir",
+      "keyIcon": "\ue7cd",
+      "text": "elixir --version | awk '/^Elixir/{print $2}'",
+      "format": "elixir {}"
+    },
+
+
+    /*
+    { "type": "separator", "string": "──────── Network & Power ────────" },
+    "localip", "battery", "poweradapter", "locale",
+
+    */
+    "break",
+    "colors"
+  ]
+}
