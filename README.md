@@ -79,3 +79,7 @@
 - [starship 配置文档](https://starship.rs/config/)
 - [Nerd Fonts](https://www.nerdfonts.com/)
 - [Catppuccin](https://catppuccin.com/)
+
+## 许可证
+
+本仓库采用 [Unlicense](UNLICENSE) 授权，内容贡献至公有领域。你可以自由复制、修改、分发或用于任何目的，无需署名。
