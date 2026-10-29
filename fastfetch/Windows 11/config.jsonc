@@ -1,19 +1,32 @@
 {
+  // JSON Schema：让编辑器提供配置补全和校验
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  // Logo：使用 fastfetch 内置的 Windows 11 图标
   "logo": {
     "type": "builtin",
     "source": "Windows 11",
+    // Logo 与右侧信息之间的留白：上 / 左 / 右
     "padding": { "top": 0, "left": 2, "right": 3 }
   },
+
+  // 信息区显示样式
   "display": {
+    // 键与值之间的分隔符
     "separator": ": ",
+    // 键显示为「图标 + 文字」，固定宽度 20 个字符以保持对齐
     "key": { "type": "both", "width": 20 }
   },
+
+  // 模块按数组顺序从上到下渲染；字符串形式表示使用该模块的默认配置
   "modules": [
+    // 标题：当前用户 @ 主机名
     "title",
 
     { "type": "separator", "string": "──────── System ────────", "times": 1 },
     { "type": "os", "keyIcon": "\ue8e5" },
+    // 自定义模块：调用 PowerShell 列出已安装的 WSL 发行版及其版本
+    // 先设置 UTF-8 输出，避免中文/特殊字符乱码；再解析 `wsl -l -v` 的表格输出
     { "type": "command", "key": "WSL2", "keyIcon": "\udb82\udcc7", "shell": "powershell", "param": "-NoProfile", "text": "$env:WSL_UTF8=1; [Console]::OutputEncoding=[Text.Encoding]::UTF8; (wsl -l -v | Select-Object -Skip 1 | Where-Object { $_.Trim() } | ForEach-Object { $t = (($_ -replace '\\s+',' ').Trim() -replace '^\\*\\s*','') -split ' '; if ($t.Length -ge 3) { $t[0] + ' (' + $t[1] + ')' } }) -join '; '" },
     { "type": "host", "format": "{vendor} {family}" }, "kernel", "packages", "shell",
 
@@ -24,6 +37,8 @@
     "cpu", "gpu", "memory", "swap", "disk",
 
     { "type": "separator", "string": "──────── Development ────────", "times": 1 },
+    // 以下为本机示例工具链，请按实际安装情况增删
+    // command 模块会执行命令并解析版本号；keyIcon 使用 Nerd Font 图标，需要终端启用 Nerd Font 字体
     { "type": "command",
       "key": "Rust",
       "keyIcon": "\ue7a8",
@@ -76,6 +91,7 @@
     { "type": "separator", "string": "──────── Network & Power ────────", "times": 1 },
     "localip", "locale",
 
+    // 换行后显示终端配色块
     "break",
     "colors"
   ]

@@ -1,17 +1,27 @@
 {
+  // JSON Schema：让编辑器提供配置补全和校验
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  // Logo：使用 fastfetch 内置的 Arch Linux 图标
   "logo": {
     "type": "builtin",
     "source": "arch"
   },
+
+  // 信息区显示样式
   "display": {
     "separator": ": ",
+    // 键名使用黄色，和 Arch Logo 呼应
     "color": {
       "keys": "yellow"
     },
-    "key": { "type": "both", "width": 18 }
+    // 键显示为「图标 + 文字」，固定宽度 18 个字符以保持对齐
+    "key": { "type": "both", "width": 19 }
   },
+
+  // 模块按数组顺序从上到下渲染
   "modules": [
+    // 标题：当前用户 @ 主机名
     "title",
 
     { "type": "separator", "string": "──────── System ────────", "times": 1 },
@@ -24,10 +34,14 @@
 
     { "type": "separator", "string": "──────── Hardware ────────", "times": 1 },
     "cpu", "gpu", "memory", "swap",
+    // 统计根分区和 Windows 盘（/mnt/c）所在文件系统的占用
     { "type": "disk", "folders": "/:/mnt/c" },
+    // WSL2 内核源码目录位于只读的虚拟文件系统上，单独展示其占用情况
     { "type": "disk", "folders": "/usr/src/linux-headers-6.18.54.1-microsoft-standard-WSL2", "key": "Disk ({mountpoint})", "format": "\n                                                          {size-used} / {size-total} ({size-percentage}) - {filesystem} [Read-only]" },
 
     { "type": "separator", "string": "──────── Development ────────", "times": 1 },
+    // 以下为本机示例工具链，请按实际安装情况增删
+    // command 模块会执行命令并提取版本号
     {
       "type": "command",
       "key": "Haskell",
@@ -52,10 +66,12 @@
 
 
     /*
+    // 网络、电池、电源适配器与语言环境（按需取消注释）
     { "type": "separator", "string": "──────── Network & Power ────────" },
     "localip", "battery", "poweradapter", "locale",
 
     */
+    // 换行后显示终端配色块
     "break",
     "colors"
   ]

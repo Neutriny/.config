@@ -1,12 +1,15 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
+# 不在提示符前额外插入空行
 add_newline = false
 
+# 使用下方 [palettes.frappe] 定义的配色
 palette = "frappe"
 
 # 模块顺序：系统图标 → 用户@主机 → 路径 → Git 分支/提交 → 提示符
 format = "$os$username$hostname$directory$git_branch$git_commit$character"
 
+# Catppuccin Frappe 配色
 [palettes.frappe]
 os = "#ACB0BE"
 blue = "#8CAAEE"
@@ -14,26 +17,31 @@ pink = "#F4B8E4"
 lavender = "#BABBF1"
 red = "#E78284"
 
+# 系统图标
 [os]
 format = "[$symbol]($style) "
 style = "fg:os"
 disabled = false
 
+# 按发行版指定 Nerd Font 图标
 [os.symbols]
 Arch = "\uF303"
 
+# 用户名，始终显示
 [username]
 show_always = true
 style_user = "fg:blue"
 style_root = "fg:blue"
 format = "[$user@]($style)"
 
+# 主机名，始终显示（不限于 SSH 会话）
 [hostname]
 ssh_only = false
 trim_at = ""
 style = "fg:blue"
 format = "[$hostname]($style) "
 
+# 当前路径：只显示最后一级目录，超出部分用 … 省略
 [directory]
 style = "fg:pink"
 format = "[$path]($style) "
@@ -42,18 +50,21 @@ truncate_to_repo = false
 home_symbol = "~"
 truncation_symbol = "..\uE5FE../"
 
+# Git 分支，仅在分支已关联远程时显示
 [git_branch]
 symbol = "\uE725"
 style = "fg:lavender"
 format = "[$symbol $branch]($style) "
 only_attached = true
 
+# Git 提交哈希
 [git_commit]
 style = "fg:lavender"
 format = "[\ue729 $hash]($style) "
-only_detached = true
+only_detached = false
 tag_disabled = true
 
+# 提示符图标：成功为灰色，失败为红色
 [character]
 success_symbol = "[\uF105](fg:os) "
 error_symbol = "[\uF105](fg:red) "
